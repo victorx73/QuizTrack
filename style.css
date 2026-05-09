@@ -1,0 +1,137 @@
+/* =========================================
+   VARIÁVEIS (Para Dark/Light Mode)
+========================================= */
+:root {
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --success: #10b981;
+    --success-bg: #d1fae5;
+    --danger: #ef4444;
+    --danger-bg: #fee2e2;
+    
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* Dark Mode Automático/Manual */
+[data-theme="dark"] {
+    --bg-color: #111827;
+    --card-bg: #1f2937;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-color: #374151;
+    --success-bg: rgba(16, 185, 129, 0.2);
+    --danger-bg: rgba(239, 68, 68, 0.2);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   RESET E BASE
+========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+body { background-color: var(--bg-color); color: var(--text-main); transition: var(--transition); line-height: 1.6; }
+.hidden { display: none !important; }
+.mt-3 { margin-top: 1rem; }
+.text-center { text-align: center; }
+
+/* =========================================
+   LAYOUT
+========================================= */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 5%; background-color: var(--card-bg);
+    box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100;
+}
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+.nav-controls { display: flex; gap: 1rem; align-items: center; }
+.container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+
+/* =========================================
+   CARDS
+========================================= */
+.card {
+    background-color: var(--card-bg); border-radius: var(--radius);
+    padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow);
+    border: 1px solid var(--border-color); transition: var(--transition);
+}
+
+/* =========================================
+   BOTÕES E INPUTS
+========================================= */
+.btn {
+    padding: 0.6rem 1.2rem; border-radius: 8px; border: none;
+    font-weight: 600; cursor: pointer; transition: var(--transition);
+    display: inline-block; text-align: center;
+}
+.btn.primary { background-color: var(--primary); color: white; }
+.btn.primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+.btn.outline { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+.btn.outline:hover { background-color: var(--border-color); }
+.btn.full-width { width: 100%; }
+.icon-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-main); }
+
+/* =========================================
+   DASHBOARD
+========================================= */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.stat-item {
+    background-color: var(--bg-color); padding: 1rem; border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; border: 1px solid var(--border-color);
+}
+.stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-value { font-size: 1.5rem; font-weight: 700; }
+.success-text .stat-value { color: var(--success); }
+.danger-text .stat-value { color: var(--danger); }
+.info-text .stat-value { color: var(--primary); }
+
+/* =========================================
+   QUIZ INTERFACE
+========================================= */
+.progress-container { width: 100%; height: 6px; background-color: var(--border-color); border-radius: 4px; margin-bottom: 1.5rem; overflow: hidden; }
+.progress-bar { height: 100%; background-color: var(--primary); width: 0%; transition: width 0.5s ease; }
+
+.question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+.badge { padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+.badge.bg-primary { background-color: var(--primary); color: white; }
+.badge.outline { border: 1px solid var(--border-color); color: var(--text-muted); }
+.text-muted { color: var(--text-muted); font-size: 0.9rem; }
+
+.question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.4; }
+
+.options-grid { display: flex; flex-direction: column; gap: 0.8rem; }
+.option-btn {
+    text-align: left; padding: 1rem; background-color: var(--bg-color); border: 2px solid var(--border-color);
+    border-radius: var(--radius); cursor: pointer; transition: var(--transition);
+    font-size: 1rem; color: var(--text-main); font-weight: 500;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--primary); background-color: var(--card-bg); transform: translateX(5px); }
+.option-btn:disabled { cursor: not-allowed; opacity: 0.8; }
+
+/* Estados das alternativas */
+.option-btn.correct { background-color: var(--success-bg); border-color: var(--success); }
+.option-btn.wrong { background-color: var(--danger-bg); border-color: var(--danger); }
+
+/* Feedback */
+.feedback-box { padding: 1rem; border-radius: var(--radius); border-left: 5px solid transparent; animation: slideDown 0.3s ease; }
+.feedback-box.success { background-color: var(--success-bg); border-left-color: var(--success); }
+.feedback-box.danger { background-color: var(--danger-bg); border-left-color: var(--danger); }
+.feedback-box h4 { margin-bottom: 0.5rem; }
+.exp-block { margin-top: 0.5rem; font-size: 0.95rem; }
+
+/* Animações */
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: slideDown 0.4s ease; }
+
+/* Responsividade Mobile */
+@media (max-width: 600px) {
+    .navbar { flex-direction: column; gap: 1rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .question-text { font-size: 1.1rem; }
+}
