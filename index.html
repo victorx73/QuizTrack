@@ -11,6 +11,7 @@
         <div class="logo">🧠 QuizTrack</div>
         <div class="nav-controls">
             <button id="theme-toggle" class="icon-btn" title="Alternar Tema">🌙</button>
+            <button id="btn-add-question" class="btn primary">➕ Adicionar Questão</button>
             <label for="json-upload" class="btn primary">Importar Questões</label>
             <input type="file" id="json-upload" accept=".json" class="hidden">
         </div>
@@ -40,9 +41,105 @@
             <button id="reset-stats" class="btn outline mt-3">Zerar Histórico</button>
         </section>
 
+        <div id="modal-overlay" class="modal-overlay hidden">
+            <div class="modal-content card">
+                <div class="modal-header">
+                    <h2>➕ Adicionar Nova Questão</h2>
+                    <button id="modal-close" class="icon-btn">✕</button>
+                </div>
+                <form id="question-form">
+                    <div class="form-group">
+                        <label for="q-pergunta">Pergunta *</label>
+                        <textarea id="q-pergunta" required placeholder="Digite a pergunta aqui..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Alternativas *</label>
+                        <div class="alternativas-group">
+                            <div class="alt-input">
+                                <label>A)</label>
+                                <input type="text" id="q-alt-a" required placeholder="Texto da alternativa A">
+                            </div>
+                            <div class="alt-input">
+                                <label>B)</label>
+                                <input type="text" id="q-alt-b" required placeholder="Texto da alternativa B">
+                            </div>
+                            <div class="alt-input">
+                                <label>C)</label>
+                                <input type="text" id="q-alt-c" placeholder="Texto da alternativa C (opcional)">
+                            </div>
+                            <div class="alt-input">
+                                <label>D)</label>
+                                <input type="text" id="q-alt-d" placeholder="Texto da alternativa D (opcional)">
+                            </div>
+                            <div class="alt-input">
+                                <label>E)</label>
+                                <input type="text" id="q-alt-e" placeholder="Texto da alternativa E (opcional)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="q-resposta">Resposta Correta *</label>
+                        <select id="q-resposta" required>
+                            <option value="">Selecione...</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Explicações *</label>
+                        <div class="explicacoes-group">
+                            <div class="exp-input">
+                                <label>Alternativa A:</label>
+                                <input type="text" id="q-exp-a" required placeholder="Explicação para A">
+                            </div>
+                            <div class="exp-input">
+                                <label>Alternativa B:</label>
+                                <input type="text" id="q-exp-b" required placeholder="Explicação para B">
+                            </div>
+                            <div class="exp-input">
+                                <label>Alternativa C:</label>
+                                <input type="text" id="q-exp-c" placeholder="Explicação para C">
+                            </div>
+                            <div class="exp-input">
+                                <label>Alternativa D:</label>
+                                <input type="text" id="q-exp-d" placeholder="Explicação para D">
+                            </div>
+                            <div class="exp-input">
+                                <label>Alternativa E:</label>
+                                <input type="text" id="q-exp-e" placeholder="Explicação para E">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="q-materia">Matéria *</label>
+                            <input type="text" id="q-materia" required placeholder="Ex: Matemática">
+                        </div>
+                        <div class="form-group">
+                            <label for="q-dificuldade">Dificuldade *</label>
+                            <select id="q-dificuldade" required>
+                                <option value="Fácil">Fácil</option>
+                                <option value="Médio" selected>Médio</option>
+                                <option value="Difícil">Difícil</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn primary full-width">Salvar Questão</button>
+                </form>
+            </div>
+        </div>
+
         <section id="empty-state" class="card text-center fade-in">
             <h2>Nenhuma questão carregada</h2>
-            <p>Clique em "Importar Questões" no menu superior e selecione seu arquivo JSON para começar.</p>
+            <p>Clique em "Adicionar Questão" para criar sua primeira questão ou importe um arquivo JSON.</p>
         </section>
 
         <section id="quiz-container" class="card hidden">
@@ -61,7 +158,7 @@
             <h3 id="question-text" class="question-text">Carregando...</h3>
 
             <div id="options-container" class="options-grid">
-                </div>
+            </div>
 
             <div id="feedback-box" class="feedback-box hidden mt-3">
                 <h4 id="feedback-title">Resultado</h4>
